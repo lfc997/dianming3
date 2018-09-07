@@ -1,0 +1,56 @@
+.table {
+    width: 100%;
+    height: 50px;
+    background-color: #efeded;
+    border-collapse: collapse;
+}
+
+.mt {
+    padding: 10px;
+    border: 1px solid #e2e0e0;
+    width: 100px;
+}
+
+.mt i {
+    float: left;
+    margin-left: 10px;
+
+}
+
+.mt_a_div {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.mt_a {
+    margin: 2px 5px;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.aBack {
+    background-color: #28B779;
+}
+
+.bBack {
+    background-color: #00C0F7;
+}
+
+.cBack {
+    background-color: #ff5d54;
+}
+
+.error_table {
+    display: flex;
+    width: 300px;
+    height: 40px;
+    border: 3px solid #efeded;
+    background-color: #5FB878;
+    color: white;
+    text-align: center;
+    margin: 200px auto ;
+    justify-content: center;
+    align-items: center;
+}

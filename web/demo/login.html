@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title>登录</title>
+    <link rel="stylesheet" href="../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../frame/static/css/style.css">
+    <link rel="icon" href="../frame/static/image/code.png">
+</head>
+<body>
+
+<div class="login-main">
+    <header class="layui-elip">登录</header>
+    <form class="layui-form" method="post">
+        <div class="layui-input-inline">
+            <input type="text" name="account" required lay-verify="required" placeholder="邮箱/手机号码" autocomplete="off"
+                   class="layui-input" id="useName">
+        </div>
+        <div class="layui-input-inline">
+            <input type="password" name="password" required lay-verify="required" placeholder="密码" autocomplete="off"
+                   class="layui-input" id="password">
+        </div>
+        <div class="layui-input-inline login-btn">
+            <button type="button" class="layui-btn" id="button_login">登录</button>
+        </div>
+        <hr/>
+        <div style="display: flex;flex-direction: row;margin-top: 30px">
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn layui-btn-primary">QQ登录</button>
+            </div>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn layui-btn-normal">微信登录</button>
+            </div>
+        </div>
+        <p><a href="register.html" href-url="register.html" class="fl">立即注册</a><a href="javascript:;"
+                                                                                  class="fr">忘记密码？</a></p>
+    </form>
+</div>
+
+
+<script src="../frame/layui/layui.js"></script>
+<script src="../js/untils.js"></script>
+<script src="../js/URl.js"></script>
+<script type="text/javascript">
+    var login_button = document.getElementById("button_login");
+    login_button.onclick = function () {
+        console.log("登陆")
+        var useName = document.getElementById("useName");
+        var password = document.getElementById("password");
+        var xmlHttp = createXMlHttp();
+        xmlHttp.open("POST", url_login, true);
+        xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.status == 200 & xmlHttp.readyState == 4) {
+                var date = JSON.parse(xmlHttp.responseText);
+                if (date.code == 2001) {
+                    console.log("登陆成功");
+                    window.location.assign("tips.html");
+                    var index_useName = window.parent.document.getElementById("Index_useName");
+                    var imgLogin = window.parent.document.getElementById("imageLogin");
+                    imgLogin.style.display = "block";
+                    index_useName.innerText = useName.value;
+
+                } else {
+                    alert("登陆失败")
+                }
+            }
+        };
+
+        var text = "name=" + useName.value + "&password=" + password.value;
+        console.log(text);
+        xmlHttp.send(text);
+    }
+</script>
+</body>
+</html>

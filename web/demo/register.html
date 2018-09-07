@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]>
+<html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>
+<html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>html5用户注册页面模板</title>
+
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link href="../css/normalize.css" rel="stylesheet"/>
+    <link href="../css/jquery-ui.css" rel="stylesheet"/>
+    <link href="../css/jquery.idealforms.min.css" rel="stylesheet" media="screen"/>
+
+    <style type="text/css">
+        body {
+            font: normal 15px/1.5 Arial, Helvetica, Free Sans, sans-serif;
+            color: #222;
+            background: url("../image/pattern.png");
+            overflow-y: scroll;
+            padding: 60px 0 0 0;
+        }
+
+        #my-form {
+            width: 755px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 3em;
+            border-radius: 3px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+        }
+
+        #comments {
+            width: 350px;
+            height: 100px;
+        }
+    </style>
+
+</head>
+<div style="text-align:center;">
+    <p><b>点名系统注册</b></p>
+</div>
+<body>
+
+
+<div class="row">
+
+    <div class="eightcol last">
+
+        <!-- Begin Form -->
+
+        <form id="my-form">
+
+            <section name="第一步">
+                <div><label>邮箱:</label><input id="email_email" name="email" data-ideal="required email" type="email"/>
+                </div>
+                <div><label>用户名:</label><input id="email_username" name="username" type="text"/></div>
+                <div><label>密码:</label><input id="email_pass" name="password" type="password"/></div>
+                <!--<div><label>上传头像:</label><input id="email_file" name="file" multiple type="file"/></div>-->
+            </section>
+
+
+            <section name="第二步">
+                <div><label>电话:</label><input type="tel" name="phone" id="phone"/></div>
+                <div><label>验证码:</label><input id="yzm" name="yzm" type="text"/></div>
+            </section>
+
+            <div>
+                <hr/>
+            </div>
+
+            <div>
+                <button type="button" id="mySubmit">提交</button>
+                <button id="reset" type="button">重置</button>
+            </div>
+
+        </form>
+
+        <!-- End Form -->
+
+    </div>
+
+</div>
+<script src="../js/untils.js"></script>
+<script>
+    var mButton = document.getElementById("mySubmit");
+    mButton.onclick = function () {
+        var email = document.getElementById("email_email");
+        var useName = document.getElementById("email_username");
+        var password = document.getElementById("email_pass");
+        var phone = document.getElementById("phone");
+        var yzm = document.getElementById("yzm");
+
+        var xmlHttp = createXMlHttp();
+        xmlHttp.open("POST", "/dianming2/register", true);
+        //"Content-Type", "application/x-www-form-urlencoded"
+        xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.status == 200 && xmlHttp.readyState == 4) {
+                console.log(xmlHttp.responseText);
+                var date = JSON.parse(xmlHttp.responseText);
+                if (date.code == 1001) {
+                    window.location.assign("/dianming2/waitRegister.html")
+                } else {
+                    alert("注册失败" + date.message);
+                    console.log("注册失败")
+                }
+            }
+
+        }
+        var re = "email=" + email.value + "&name=" + useName.value + "&password=" + password.value + "&phone=" + phone.value + "&yzm=" + yzm.value;
+        console.log(re);
+        xmlHttp.send(re)
+
+
+    }
+
+</script>
+
+<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../js/jquery.idealforms.js"></script>
+<script type="text/javascript">
+    var options = {
+
+        onFail: function () {
+            alert($myform.getInvalid().length + ' invalid fields.')
+        },
+
+        inputs: {
+            'password': {
+                filters: 'required pass',
+            },
+            'username': {
+                filters: 'required username',
+                data: {
+                    //ajax: { url:'validate.php' }
+                }
+            },
+            'file': {
+                filters: 'extension',
+                data: {extension: ['jpg']}
+            },
+            'comments': {
+                filters: 'min max',
+                data: {min: 50, max: 200}
+            },
+            'states': {
+                filters: 'exclude',
+                data: {exclude: ['default']},
+                errors: {
+                    exclude: '选择国籍.'
+                }
+            },
+            'langs[]': {
+                filters: 'min max',
+                data: {min: 2, max: 3},
+                errors: {
+                    min: 'Check at least <strong>2</strong> options.',
+                    max: 'No more than <strong>3</strong> options allowed.'
+                }
+            }
+        }
+
+    };
+
+    var $myform = $('#my-form').idealforms(options).data('idealforms');
+
+    $('#reset').click(function () {
+        $myform.reset().fresh().focusFirst()
+    });
+
+    $myform.focusFirst();
+</script>
+
+</body>
+</html>

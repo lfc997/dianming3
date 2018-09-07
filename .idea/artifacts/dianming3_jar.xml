@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="dianming3:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/dianming3_jar</output-path>
+    <root id="archive" name="dianming3.jar">
+      <element id="module-output" name="dianming3" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/xom-1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.ejb.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.jms.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/ezmorph-1.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.servlet.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.resource.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-lang-2.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.annotation.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.persistence.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.servlet.jsp.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.transaction.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/json-lib-2.4-jdk15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-logging-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.servlet.jsp.jstl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-beanutils-1.8.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-collections-3.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-5.1.39-bin.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

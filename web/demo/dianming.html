@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>点名</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <style>
+
+
+        .frame_2 {
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            margin: auto;
+        }
+
+        .content_2 {
+            width: 70%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+        }
+
+        .setting_2 {
+            border-radius: 30px;
+            padding-bottom: 30px;
+            position: fixed;
+            width: 20%;
+            right: 10px;
+            top: 80px;
+            background-color: #EDEDED;
+            box-shadow: 8px 2px 5px #e2e0e0;
+        }
+
+        #myHeadImage {
+            margin-top: 50px;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #myHeadImage img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+        }
+
+        .randomDiv {
+            margin-top: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+
+        .myButton {
+            margin-left: 10px;
+        }
+
+        #myRandomButton {
+            /*color: white;*/
+            /*font-size: 20px;*/
+            /*font-family: 华文宋体;*/
+            /*border: 0px;*/
+            margin-left: 10px;
+        }
+
+        #myRandomButton:hover {
+            cursor: pointer;
+        }
+
+        .randomNumberDiv {
+            margin-left: 10px;
+            display: none;
+            height: 0px;
+            background-color: #ffd352;
+            transition: background-color 2s;
+            -webkit-transition: background-color 2s;
+        }
+
+        #myOrderButton {
+            /*color: white;*/
+            /*font-size: 20px;*/
+            /*font-family: 华文宋体;*/
+            /*background-color: #8d9fff;*/
+            /*border: 0px;*/
+            margin-left: 10px;
+        }
+
+        #myOrderButton:hover {
+            cursor: pointer;
+        }
+
+        .randomDiv img {
+            margin-left: auto;
+            margin-right: 10px;
+
+        }
+
+        .randomDiv img:hover {
+            cursor: pointer;
+        }
+
+        .studentCard {
+            width: 95%;
+            height: 60px;
+            background-color: #EDEDED;
+            border: 3px solid #e2e0e0;
+            border-radius: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+        }
+
+        .studentCard div {
+            width: 300px;
+        }
+
+        .studentId {
+            margin-left: 10px;
+        }
+
+        .className {
+            width: 100%;
+            margin-top: 20px;
+
+        }
+
+        .teacherName {
+            width: 100%;
+            margin-top: 20px;
+            color: black;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .class_Card {
+            width: 80%;
+            height: 100px;
+            background-color: #839dff;
+            border-radius: 10px;
+            margin: auto;
+        }
+
+        .class_Card_1 {
+            font-size: 18px;
+            font-family: 华文宋体;
+            text-align: center;
+            width: 100%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .class_Card_2 {
+            width: 100%;
+            height: 20%;
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: start;
+            align-items: center;
+        }
+
+        .class_Card_2 div {
+            margin-right: 2px;
+        }
+
+        .submit {
+            /*background-color: #8d9fff;*/
+            /*font-size: 20px;*/
+            /*border: 0px;*/
+            margin-left: 10px;
+        }
+
+        .hint {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            border-radius: 10px;
+            background-color: #ffd352;
+            text-align: center;
+            padding: 10px 40px;
+            transition: right 2s ease;
+        }
+    </style>
+</head>
+<body>
+<div class="hint" id="hint">
+
+</div>
+<div class="frame_2">
+    <!--content-->
+    <div class="content_2" id="student_content">
+        <div id="error" style="width: 100px; color: #0f0f0f;display: none">加载失败</div>
+        <div class="studentCard" id="studentCard" style="display: none">
+            <div class="studentId"><span>学号：</span><span style="color: #f11838" id="studentId">201524070145</span></div>
+            <div><span>姓名：</span><span style="color:#f11838;" class="studentName">杨沛霖</span></div>
+            <div id="type">类型：<input type="radio" name="type" value="迟到" id="beLate">迟到<input type="radio" name="type"
+                                                                                              value="旷课" id="truant">旷课
+                <input type="radio" name="type" value="早退" id="LeaveEarly">早退
+            </div>
+        </div>
+    </div>
+    <!--setting-->
+    <div class="setting_2">
+
+
+        <!--班级信息-->
+        <div class="className">
+            <div class="class_Card">
+                <div class="class_Card_1">
+                    <div>2015级软件工程班</div>
+                </div>
+                <div class="class_Card_2">
+                    <div><span style="font-size: 10px">全班人数：</span><span id="classNumber">145</span></div>
+                    <div><span style="font-size: 10px">上一次实到人数：</span><span id="lastClassNumber">145</span></div>
+                </div>
+            </div>
+
+        </div>
+        <!--随机点名-->
+        <div>
+            <div class="randomDiv" id="myRandom">
+                <button id="myRandomButton" type="button">随机点名</button>
+                <button id="random_stop" class="myButton">暂停</button>
+                <button id="random_continue" class="myButton">继续</button>
+                <button id="random_restart" class="myButton">重新开始</button>
+                <img src="../image/down.png">
+            </div>
+            <div class="randomNumberDiv" id="randomNumberDiv"><span>随机人数：</span><input style="width: 40px" type="number"
+                                                                                       id="randomNumber"
+                                                                                       value="5">
+            </div>
+        </div>
+
+        <!--顺序点名-->
+        <div>
+            <div class="randomDiv" id="myOrder">
+                <button id="myOrderButton" type="button">顺序点名</button>
+                <button id="Order_stop" class="myButton">暂停</button>
+                <button id="Order_continue" class="myButton">继续</button>
+                <button id="Order_restart" class="myButton">重新开始</button>
+                <img src="../image/down.png">
+            </div>
+            <div class="randomNumberDiv" id="orderNumberDiv"><span>间隔：</span><input style="width: 40px" type="number"
+                                                                                    value="2" id="timeInterval">
+            </div>
+        </div>
+        <div>
+            <div>
+                <div class="randomDiv">
+                    <button type="button" class="submit" id="button_pull">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+                    <img src="../image/down.png">
+                </div>
+            </div>
+        </div>
+        <div><a href="map.html">统计分析</a></div>
+        <div><a href="Table.html">具体情况</a></div>
+    </div>
+</div>
+</div>
+<script src="../js/URl.js"></script>
+<script>
+    <!--
+    // 自身的业务逻辑-->
+    <!--向下箭头-->
+    ;(function (window, undefined) {
+        var random_off_close = false;//关闭
+        var myUp_random = document.querySelector(".randomDiv img");
+        var randomDiv = document.getElementById("randomNumberDiv");
+        myUp_random.onclick = function () {
+            if (random_off_close) {//打开状态
+                randomDiv.style.display = "none";
+                myUp_random.src = image_down
+                random_off_close = false;//打开
+                this.off_clos = random_off_close;
+            } else {//关闭状态
+                randomDiv.style.display = "block";
+                myUp_random.src = image_up
+                random_off_close = true;//打开
+                this.off_clos = random_off_close;
+            }
+        }
+        var myUp_order = document.querySelector("#myOrder img")
+        console.log(myUp_order)
+        var orderDiv = document.getElementById("orderNumberDiv")
+        var order_off_close = false;//关闭
+        myUp_order.onclick = function () {
+            if (order_off_close) {//打开状态
+                orderDiv.style.display = "none"
+                myUp_order.src = image_down
+                order_off_close = false;
+            } else {//关闭状态
+                orderDiv.style.display = "block"
+                myUp_order.src = image_up
+                order_off_close = true;
+            }
+        }
+
+    })(window, undefined)
+</script>
+<script src="../js/RequestStudent.js"></script>
+<script>
+    //
+    <!--等待页面加载完毕后才加载数据-->
+    window.onload = function () {
+        //头部数据
+        ;(function (window, undefined) {
+            var heard = '{"teacherId": "8989898", "headImage": "/dianming2/image/head.jpg", "teacherName": "opoop","ClassId": "1027800", "myClassName": "25015级软件工程班", "classNumber": "154", "lastClassNumber": "54"}';
+            var heardDate = JSON.parse(heard);
+            var className = document.querySelector(".class_Card_1")
+            className.innerHTML = heardDate.myClassName;
+            var classNumber = document.getElementById("classNumber")
+            classNumber.innerText = heardDate.classNumber;
+            var lastClassNumber = document.getElementById("lastClassNumber")
+            lastClassNumber.innerText = heardDate.lastClassNumber;
+        })(window, undefined)
+//content的请求
+        ;(function (window, undefined) {
+            // "classId", "asdfawerq3r1234"
+            var classId = window.parent.classId;//保存到了父级的window中
+            console.log("dianming:" + classId);
+            if (classId != null) {
+                requestStudent("classId", classId, function (students) {
+                    if (students != null) {
+                        setStudentsView(students);
+                    } else {
+                        window.alert("数据加载失败")
+                    }
+                });
+            } else {
+                var hint = document.getElementById("hint");
+                hint.style.display = "block";
+                hint.innerText = "还没有上一次的记录";
+                setTimeout(function () {
+                    hint.innerText = "";
+                    hint.style.display = "none";
+                }, 5000)
+            }
+
+
+
+            function setStudentsView(studentsDate) {
+                var student_content = document.getElementById("student_content");
+
+                var length = studentsDate.length;
+                for (var i = 0; i < length; i++) {
+                    //循环加载学生
+                    var studentCard = document.getElementById("studentCard").cloneNode(true);
+                    //设置数据
+                    var studentID = studentCard.querySelector("#studentId")
+                    studentID.innerText = studentsDate[i].studentId;
+                    studentCard.querySelector(".studentName").innerText = studentsDate[i].studentName;
+                    var inputs = studentCard.querySelectorAll("#type input");
+                    for (var j = 0; j < inputs.length; j++) {
+                        inputs[j].name = "type_" + i;
+                    }
+                    studentCard.style.display = "flex"
+                    student_content.appendChild(studentCard);
+                }
+
+
+            }
+
+        })(window, undefined)
+
+
+
+        //随机点名功能的实现
+        ;(function (window, undefined) {
+            var hint = document.getElementById("hint");
+            var randomButton = document.getElementById("myRandomButton");
+            var randomNumber = document.getElementById("randomNumber");
+            var number = parseInt(randomNumber.value);
+            randomNumber.onblur = function () {
+                number = parseInt(this.value);
+            };
+            var interval = null;
+            var stop = true;
+            randomButton.onclick = function () {
+                if (interval == null) {
+                    var studentsDivs = clearStudent();
+                    studentsDivs = document.getElementsByClassName("studentCard");
+                    var randoms = getRandoms(number, 0, studentsDivs.length);
+                    var count = randoms.length - 1;
+                    hint.style.display = "block";
+                    hint.innerText = "正在点名......";
+                    interval = setInterval(function () {
+                        if (stop) {
+                            setSelectStudentColor(studentsDivs[randoms[count]]);
+                            count--;
+                            if (count < 0) {
+                                hint.style.display = "block";
+                                hint.innerText = "点名完毕......";
+                                clearInterval(interval);
+                                interval = null;
+                            }
+                        } else {
+                            console.log("暂停中");
+                        }
+                    }, 100)
+                } else {
+                    console.log("正在点名")
+                }
+            }
+            //暂停的按钮
+            var random_stop = document.getElementById("random_stop");
+            random_stop.onclick = function (ev) {
+                //在已经结束后，必须true，不然再一次点名。就会出现不能点名功能
+                if (interval == null) {
+                    hint.style.display = "block";
+                    hint.innerText = "没有点名......";
+                    stop = true;
+                } else {
+                    hint.style.display = "block";
+                    hint.innerText = "暂停中......";
+                    stop = false;
+                }
+
+            }
+            //继续按钮
+            var random_continue = document.getElementById("random_continue");
+
+            random_continue.onclick = function (ev) {
+                if (interval == null) {
+                    hint.style.display = "block";
+                    hint.innerText = "没有点名......";
+                } else {
+                    hint.style.display = "block";
+                    hint.innerText = "正在点名......";
+                }
+
+                stop = true;
+            }
+//重新开始
+            var random_restart = document.getElementById("random_restart");
+            random_restart.onclick = function (ev) {
+//清除之前的任何功能；
+                stop = true;
+                clearInterval(interval);
+                interval = null;
+                //重新点名
+                if (interval == null) {
+                    hint.style.display = "block";
+                    hint.innerText = "正在点名......";
+                    var studentsDivs = clearStudent();
+                    studentsDivs = document.getElementsByClassName("studentCard");
+                    var randoms = getRandoms(number, 0, studentsDivs.length);
+                    var count = randoms.length - 1;
+                    interval = setInterval(function () {
+                        if (stop) {
+                            setSelectStudentColor(studentsDivs[randoms[count]]);
+                            count--;
+                            if (count < 0) {
+                                hint.style.display = "block";
+                                hint.innerText = "点名完毕......";
+                                clearInterval(interval);
+                                interval = null;
+                            }
+                        } else {
+                            console.log("暂停中");
+                        }
+                    }, 100)
+                } else {
+                    console.log("正在点名")
+                }
+            }
+
+//设置选中的颜色变化
+
+
+            //number获取随机的个数，start:开始的位置，end 结束的位置
+            function getRandoms(number, start, end) {
+                var random = [];
+                for (var i = 0; i < number; i++) {
+                    while (true) {
+                        var myNumber = Math.floor(Math.random() * (Math.abs(end - start) + start));
+                        if (!isArray(myNumber, random)) {
+                            break;
+                        }
+                    }
+                    random.push(myNumber)
+                }
+                //降序
+                random.sort(function (a, b) {
+                    return b - a;
+                });
+                return random;
+            }
+
+            function isArray(number, a) {
+                //存在返回为ture,z不存在返回为false
+                for (var i = 0; i < a.length; i++) {
+                    if (number == a[i]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            window.clearStudent = clearStudent;
+            window.interval_random = interval;
+        })(window, undefined)
+
+        function setSelectStudentColor(studentCard) {
+            studentCard.style.backgroundColor = "#de8100"
+            var stuId = studentCard.querySelector("#studentId");
+            stuId.style.color = "#ffffff";
+            var stuName = studentCard.querySelector(".studentName");
+            stuName.style.color = "#ffffff";
+        }
+
+        function clearStudent() {
+            var students = document.getElementsByClassName("studentCard");
+            for (var i = 1; i < students.length; i++) {
+                students[i].className = "studentCard";
+                students[i].style.backgroundColor = "#EDEDED"
+                var stuId = students[i].querySelector("#studentId");
+                stuId.style.color = "#f11838";
+                var stuName = students[i].querySelector(".studentName");
+                stuName.style.color = "#f11838";
+                console.log("clear")
+            }
+            return students;
+        }
+
+        //    顺序点名
+        ;(function (window, undefined) {
+            var hint = document.getElementById("hint");
+            var OrderButton = document.getElementById("myOrderButton")
+            var intervalInput = document.getElementById("timeInterval");
+            var timeInterval = parseInt(intervalInput.value)
+            intervalInput.onblur = function () {
+                timeInterval = this.value;
+            }
+            var interval = null;
+            var noStop = true;
+            OrderButton.onclick = function () {
+
+                if (interval == null) {
+                    var studentsDivs = clearStudent();
+                    var count = 1;
+                    hint.style.display = "block";
+                    hint.innerText = "正在点名......";
+                    interval = setInterval(function () {
+                        if (noStop) {
+
+                            var student = studentsDivs[count];
+                            setSelectStudentColor(student)
+                            count++;
+                            if (count == studentsDivs.length) {
+                                console.log("点名完成")
+                                clearInterval(interval);
+                                interval = null;
+                            }
+                        } else {
+                            console.log("暂停中》》》")
+                        }
+                    }, timeInterval * 1000)
+                } else {
+                    console.log("正在点名。。。。")
+                }
+
+            }
+            var Order_stop = document.getElementById("Order_stop");
+            Order_stop.onclick = function (ev) {
+                //在已经结束后，必须true，不然再一次点名。就会出现不能点名功能
+                if (interval == null) {
+                    noStop = true;
+                    hint.style.display = "block";
+                    hint.innerText = "没有点名......";
+                } else {
+                    hint.style.display = "block";
+                    hint.innerText = "暂停中......";
+                    noStop = false;
+                }
+
+            }
+            //继续按钮
+            var Order_continue = document.getElementById("Order_continue");
+
+            Order_continue.onclick = function (ev) {
+                if (interval == null) {
+                    hint.style.display = "block";
+                    hint.innerText = "没有点名......";
+                } else {
+                    hint.style.display = "block";
+                    hint.innerText = "正在点名......";
+                }
+                noStop = true;
+            }
+//重新开始
+            var random_restart = document.getElementById("Order_restart");
+            random_restart.onclick = function (ev) {
+//清除之前的任何功能；
+                noStop = true;
+                clearInterval(interval);
+                interval = null;
+                //重新点名
+                if (interval == null) {
+                    var studentsDivs = clearStudent();
+                    hint.style.display = "block";
+                    hint.innerText = "正在点名";
+                    var count = 1;
+                    interval = setInterval(function () {
+                        if (noStop) {
+                            var student = studentsDivs[count];
+                            setSelectStudentColor(student)
+                            count++;
+                            if (count == studentsDivs.length) {
+                                clearInterval(interval);
+                                interval = null;
+                            }
+                        } else {
+                            console.log("暂停中》》》")
+                        }
+                    }, timeInterval * 1000)
+                } else {
+                    console.log("正在点名。。。。")
+                }
+            }
+            window.interval_order = interval;
+        })(window, undefined)
+
+
+    }
+</script>
+<script>
+    ;(function () {
+        var button_pull = document.getElementById("button_pull");
+        //首先判断，是否还在点名，如果还在点名，请提示用户先停止点名，在停止点名后，才能提交点名名单，上传服务器
+        button_pull.onclick = function (ev) {
+            if (window.interval_order != null || window.interval_random != null) {
+                console.log("正在点名中，无法提交")
+                alert("正在点名中，无法提交");
+            }
+            this.disabled = true;
+            var content = document.getElementById("student_content");
+            var studentCards = content.getElementsByClassName("studentCard");
+            var studentDates = new Array();
+            for (var i = 0; i < studentCards.length; i++) {
+                var student = new Object();
+                var studentCard = studentCards[i];
+                var studentId = studentCard.querySelector("#studentId");
+                var beLate = studentCard.querySelector("#beLate");
+                var truant = studentCard.querySelector("#truant");
+                var LeaveEarly = studentCard.querySelector("#LeaveEarly");
+                student.studentId = studentId.innerText;
+                beLate.checked ? student.late = 1 : student.late = 0;
+                truant.checked ? student.truancy = 1 : student.truancy = 0;
+                LeaveEarly.checked ? student.leave = 1 : student.leave = 0;
+                //只有数据改变的才会加载
+                if (beLate.checked || truant.checked || LeaveEarly.checked) {
+                    studentDates.push(student);
+                }
+            }
+            console.log(JSON.stringify(studentDates));
+            try {
+                var text = JSON.stringify(studentDates);
+            } catch (e) {
+                alert("出错");
+
+            }
+            //获取数据，成json
+            //创建申请网路发送数据
+            //发送数据，
+            //发送数据时，把提交按钮，控制为不可操控。
+            //数据提交成功，可操控，
+            //显示成功，与失败
+            var xmlHttp = createXMlHttp();
+            xmlHttp.open("POST", "http://localhost:8080/dianming2/saveStudent", true);
+            //("Content-Type", "application/x-www-form-urlencoded")
+            xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.status == 200 && xmlHttp.readyState == 4) {
+                    var result = JSON.parse(xmlHttp.responseText);
+                    var text;
+                    if (result.code == 7001) {
+                        text = "学生系统更新成功";
+                    } else {
+                        text = "学生系统更新失败";
+                    }
+                    var r = confirm(text);
+                    if (r == true) {
+                        button_pull.disabled = false;
+                    }
+                    else {
+                        button_pull.disabled = false;
+                    }
+                }
+            }
+            xmlHttp.send("studentDate=" + JSON.stringify(studentDates));
+
+        }
+
+
+        function createXMlHttp() {
+            try {
+                return new XMLHttpRequest();
+            } catch (e) {
+                try {
+                    return new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try {
+                        return new ActiveXObject("Microsoft.XMLHTTP");
+
+                    } catch (e) {
+                        return "该浏览器不知请求ajax";
+                    }
+                }
+            }
+
+        }
+    })()
+</script>
+
+</body>
+</html>

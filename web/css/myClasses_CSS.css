@@ -1,0 +1,60 @@
+.content {
+    width: 100%;
+    height: 100%;
+}
+
+.ClassLine {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    float: left;
+}
+
+.myClass {
+    height: 80px;
+    margin: 20px;
+    border-radius: 10px;
+    background-color: #ffd352;
+}
+
+.className {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.className div {
+    font-size: 20px;
+    font-family: 华文宋体;
+    color: black;
+    text-align: center;
+}
+
+.classNumber {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.classNumber div {
+    margin-left: 20px;
+}
+
+.myClassAdd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ClassLine:hover {
+    cursor: pointer;
+}

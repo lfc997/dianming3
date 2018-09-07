@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="jquery-3.3.1.js"></script>-->
+    <!--ypl ON 2018/9/2-->
+    <link href="../css/table.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="../image/make.png">
+    <script src="../js/URl.js"></script>
+    <style>
+        .btn_div {
+            width: 100%;
+            height: 50px;
+            top: 0px;
+            left: 0px;
+            position: fixed;
+            background-color: white;
+
+        }
+
+        .title_a {
+            text-decoration: none;
+            padding: 5px 20px;
+            border-radius: 5px;
+            color: white;
+            font-size: 20px;
+            margin: 20px 10px;
+        }
+
+        .btn_de {
+            background-color: #FF5722;
+        }
+
+        .btn_add {
+            background-color: #009688;
+        }
+
+        .btn_span_r {
+            margin-top: 10px;
+            float: right;
+        }
+
+        .btn_span_l {
+            margin-top: 10px;
+            float: left;
+        }
+
+        .content_tbody {
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        .mt_b {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .table_input {
+            width: 100%;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+            background-color: #efeded;
+            border: none;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="mTable">
+    <!-- 工具集 -->
+    <div class="btn_div">
+      <span class="btn_span_l">
+          <a href="javascript:void(0) " class="title_a btn_de" id="remove_all">批量删除</a>
+          <a href="javascript:void(0) " class="title_a btn_add" id="button_add">添加</a>
+          <a href="# " class="title_a btn_add " id="refresh"><i>刷新</i></a>
+      </span>
+        <span class="btn_span_r">
+          <a href="#" class="title_a btn_de">完成</a>
+            <a href="" class="title_a btn_add">提交</a>
+      </span>
+    </div>
+    <!--标题栏-->
+    <div class="content_tbody">
+        <table class="table" cellpadding="0px" cellspacing="0px" id="table">
+            <thead>
+            <tr>
+                <th class="mt"><input type="checkbox" style="width:20px" id="main_input"></th>
+                <th class="mt"><i>学号</i></th>
+                <th class="mt"><i>姓名</i></th>
+                <th class="mt"><i>性别</i></th>
+                <th class="mt"><i>迟到</i></th>
+                <th class="mt"><i>早退</i></th>
+                <th class="mt"><i>旷课</i></th>
+                <th class="mt"><i>操作</i></th>
+            </tr>
+            </thead>
+            <tbody id="tBody">
+            <!--数据加载区-->
+            <!--<tr>-->
+            <!--<th class="mt"><input type="checkbox" style="width: 20px;"></th>-->
+            <!--<td class="mt" style="width: 200px;">201524070102</td>-->
+            <!--<td class="mt" style="width: 200px;">曾环宇</td>-->
+            <!--<td class="mt" style="width: 180px;">男</td>-->
+            <!--<td class="mt" style="width: 180px;">0</td>-->
+            <!--<td class="mt" style="width: 180px;">0</td>-->
+            <!--<td class="mt" style="width: 180px;">0</td>-->
+            <!--<td class="mt" style="width: 200px;">-->
+            <!--<div class="mt_a_div">-->
+            <!--<a class="mt_a" style="background-color: rgb(40, 183, 121);">查看</a>-->
+            <!--<a class="mt_a" style="background-color: rgb(0, 192, 247);">编辑</a>-->
+            <!--<a class="mt_a"style="background-color: rgb(255, 93, 84);">删除</a>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--</tr>-->
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="width: 100%; height: 100%;">
+    <div class="error_table" style="display: none"><i>请求失败,重新登陆试一试</i></div>
+</div>
+<script src="../js/RequestStudent.js"></script>
+<script src="../js/ReadJson.js"></script>
+<script>
+    var body = document.getElementById("tBody");
+    var table = document.getElementById("table");
+    var set = {
+        "title": [
+            {field: 'studentId', title: '学号', width: 200}
+            , {field: 'studentName', title: '姓名', width: 200}
+            , {field: 'sex', title: '性别', width: 180}
+            , {field: 'late', title: '迟到', width: 180}
+            , {field: 'leave', title: '早退', width: 180}
+            , {field: 'truancy', title: '旷课', width: 180}
+            ,],
+        "operation": {
+            "data":
+                [{"name": "查看", "color": " #28B779"}, {"name": "编辑", "color": "  #00C0F7"}, {
+                    "name": "删除",
+                    "color": "  #ff5d54"
+                },],
+            "width": 200
+        }
+    };
+    var mStudents;
+    var error_table = document.querySelector(".error_table");
+    var config = set.title;
+    var classId = window.parent.classId;
+    requestStudent("classId", classId, function (students) {
+        if (students != null) {
+            error_table.style.display = "none";
+            render(students);
+        } else {
+            error_table.style.display = "block";
+        }
+    })
+
+
+    function render(students) {
+        for (var i = 0; i < students.length; i++) {
+            //给一行的数据加载数据，渲染到界面上去；
+            //event:为鼠标的监听事件
+            //index：为行坐标
+            //type:操作中哪一个类型
+            //function中为：操作的监听事件
+            //lineDiv每一行的div
+            renderLine(i, students[i], true, function (event, index, type, lineDate, lineDiv) {
+                console.dir(event);
+                console.log("位置：" + index);
+                console.dir(type);
+                console.log("类型:", type.op_type);
+                console.dir(lineDate);
+                console.log(lineDiv);
+                switch (type) {
+                    case "查看":
+                        console.log("查看")
+
+                        break;
+                    case "编辑":
+                        console.log("编辑");
+                        //让该行的input中的disabled为false;
+                        var th = tr.querySelector("th");
+                        th.style.backgroundColor = "#ff864a";
+                        //给一个td中的添加一个输入框
+                        var inputs = tr.querySelectorAll("input");
+                        for (var i = 0; i < inputs.length; i++) {
+                            var input = inputs[i];
+                            input.disabled = false;
+                        }
+                        break;
+                    case "删除":
+                        console.log("删除")
+                        break;
+                }
+
+            });
+        }
+    }
+
+    var colorList = {"lateColor": "#7B68EE", "leaveColor": "#FF1493", "truancy": "	#DC143C"}
+    //渲染数据
+    //是否添加数据
+    //在渲染每一条的时候，如果出现迟到，旷课，早退的都要用颜色标记出来
+    //点击操作的按钮的监听事件；
+    function renderLine(i, student, isAddDate, opListen) {
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        var input = document.createElement("input");
+        input.type = "checkbox";
+        input.style.width = "20px";
+        th.appendChild(input);
+        th.className = "mt";
+        tr.appendChild(th);
+        body.appendChild(tr);
+        for (var j = 0; j < config.length; j++) {
+            var td = document.createElement("td");
+            td.className = "mt mt_b";
+            td.style.width = config[j].width + "px";
+            var input = document.createElement("input");
+            input.disabled = true;
+            input.className = "table_input";
+            input.name = config[j].field;
+            input.value = isAddDate ? student[config[j].field] : "";
+            if (isAddDate) {
+                if (student != null) {
+                    switch (config[j].field) {
+                        case "late":
+                            //如果迟到数值大于一，则要高亮显示
+                            var late = student[config[j].field];
+                            if ("number" == typeof late) {
+                                if (late > 0) {
+                                    input.style.backgroundColor = colorList.lateColor;
+                                }
+                            }
+                            break;
+                        case "leave":
+                            var late = student[config[j].field];
+                            if ("number" == typeof late) {
+                                if (late > 0) {
+                                    input.style.backgroundColor = colorList.leaveColor;
+                                }
+                            }
+                            //如果早退数值大于一，则要高亮显示
+                            break;
+                        case "truancy":
+                            //如果旷课数值大于一，则要高亮显示
+                            var late = student[config[j].field];
+                            if ("number" == typeof late) {
+                                if (late > 0) {
+                                    input.style.backgroundColor = colorList.truancy;
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+            td.appendChild(input);
+            tr.appendChild(td);
+        }
+        var con = set.operation.data;
+        var td = document.createElement("td");
+        td.className = "mt";
+        td.style.width = set.operation.width + "px";
+        var div = document.createElement("div");
+        div.className = "mt_a_div";
+        td.appendChild(div);
+        tr.appendChild(td);
+
+        for (var op = 0; op < con.length; op++) {
+            var a = document.createElement("a");
+            a.className = "mt_a";
+            a.style.backgroundColor = con[op].color;
+            a.innerText = con[op].name;
+            a.index = i;
+            //把index保存到
+            a.aomo = op;
+            a.onclick = function (event) {
+                //event鼠标事件
+                opListen(event, i, a, student, tr);
+            };//用K来做类型，判断是操作的是哪一个类型的事；
+            div.appendChild(a);
+        }
+        return tr;//把添加的一行，返回；
+    }
+
+    //刷新功能的实现
+    var re = document.getElementById("refresh");
+    re.onclick = function (ev) {
+        console.log("刷新");
+        requestStudent("classId", classId, function (students) {
+            if (students != null) {
+                error_table.style.display = "none";
+                //先清空之前的数据
+                var tBody = document.getElementById("tBody");
+                var tBody_trs = tBody.getElementsByTagName("tr");
+                // var a = 0;
+                var length = tBody_trs.length;
+                for (var i = length - 1; i >= 0; i--) {
+                    tBody_trs[i].parentNode.removeChild(tBody_trs[i]);
+                }
+                render(students);
+            } else {
+                error_table.style.display = "block";
+            }
+        })
+
+    }
+    //批量删除
+    var removeAll = document.getElementById("remove_all");
+    var main_input = document.getElementById("main_input");
+    main_input.onclick = function (ev) {
+        if (this.checked) {
+            setInputChecked(true);
+        } else {
+            setInputChecked(false);
+        }
+    }
+    removeAll.onclick = function (ev) {
+        if (main_input.checked) {
+            main_input.checked = false;
+            console.log("全部不选中");
+            setInputChecked(false);
+        } else {
+            main_input.checked = true;
+            console.log("全部选中");
+            setInputChecked(true);
+        }
+    }
+
+    //设置是否选中
+    function setInputChecked(isCheck) {
+        var tBody = document.getElementById("tBody");
+        var inputs = tBody.querySelectorAll("input");
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            input.checked = isCheck;
+        }
+    }
+</script>
+<script>
+    //标题栏的动画
+    var title_div = document.querySelector(".btn_div");
+    window.onscroll = function () {
+        var top = document.documentElement.scrollTop || document.body.scrollTop;
+        if (top < 50) {
+            title_div.style.boxShadow = "none";
+        } else {
+            title_div.style.boxShadow = "2px 2px 3px #aaaaaa";
+
+        }
+    }
+</script>
+<script>
+    <!--添加的功能的实现-->
+    var button_add = document.getElementById("button_add");
+
+    button_add.onclick = function () {
+        //获取最后一个的离顶部的位置
+        var trs = body.querySelectorAll("tr");
+        console.dir(trs);
+        var tr = trs[trs.length - 1];
+        //滚动指定位置，
+        var stop = 0;
+        var interval = setInterval(function () {
+            stop = stop + 300;
+            window.scrollTo(0, stop);
+            if (stop >= tr.offsetTop) {
+                window.scrollTo(0, tr.offsetTop);
+                clearInterval(interval);
+                interval = null;
+            }
+        }, 50);
+        //给添加的一行高亮显示
+        //然后添加一行空白的一行
+        var tr = renderLine(trs.length, null, false);
+        var th = tr.querySelector("th");
+        th.style.backgroundColor = "#ff864a";
+        //给一个td中的添加一个输入框
+        var inputs = tr.querySelectorAll("input");
+        console.dir(inputs);
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            input.disabled = false;
+        }
+
+
+    }
+</script>
+</body>
+</html>

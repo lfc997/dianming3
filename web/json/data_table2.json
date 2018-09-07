@@ -1,0 +1,439 @@
+{
+  "msg": "请求到位",
+  "code": 0,
+  "count": 54,
+  "data": [
+    {
+      "studentId": "201524070102",
+      "studentName": "曾环宇",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070103",
+      "studentName": "陈川",
+      "sex": "女",
+      "late": 0,
+      "leave": 2,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070104",
+      "studentName": "陈登",
+      "sex": "男",
+      "late": 3,
+      "leave": 1,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070105",
+      "studentName": "陈燕",
+      "sex": "女",
+      "late": 0,
+      "leave": 1,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070106",
+      "studentName": "陈瑜",
+      "sex": "男",
+      "late": 2,
+      "leave": 0,
+      "truancy": 1
+    },
+    {
+      "studentId": "201524070107",
+      "studentName": "丁卿纯",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070108",
+      "studentName": "方严华",
+      "sex": "男",
+      "late": 1,
+      "leave": 0,
+      "truancy": 6
+    },
+    {
+      "studentId": "201524070109",
+      "studentName": "符春月",
+      "sex": "女",
+      "late": 1,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070110",
+      "studentName": "刚帅",
+      "sex": "男",
+      "late": 0,
+      "leave": 1,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070111",
+      "studentName": "古可欣",
+      "sex": "女",
+      "late": 0,
+      "leave": 1,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070112",
+      "studentName": "黄湘宁",
+      "sex": "女",
+      "late": 1,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070113",
+      "studentName": "孔岩",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070114",
+      "studentName": "寇静杰",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070115",
+      "studentName": "兰靖华",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070116",
+      "studentName": "李帆",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070117",
+      "studentName": "李国正",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070118",
+      "studentName": "李佳妮",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070119",
+      "studentName": "李琳玥",
+      "sex": "女",
+      "late": 1,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070120",
+      "studentName": "李雪丽",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 1
+    },
+    {
+      "studentId": "201524070121",
+      "studentName": "李志伦",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070122",
+      "studentName": "连光辉",
+      "sex": "男",
+      "late": 1,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070123",
+      "studentName": "梁富春",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070124",
+      "studentName": "梁明旺",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070125",
+      "studentName": "梁向荣",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070126",
+      "studentName": "林道发",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070127",
+      "studentName": "林俊",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070128",
+      "studentName": "刘云飞",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070129",
+      "studentName": "刘子钰",
+      "sex": "男",
+      "late": 1,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070130",
+      "studentName": "罗优",
+      "sex": "女",
+      "late": 0,
+      "leave": 1,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070131",
+      "studentName": "马昕",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070132",
+      "studentName": "马欣龙",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070133",
+      "studentName": "屈树钊",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070134",
+      "studentName": "阙镇源",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070135",
+      "studentName": "冉杨",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 1
+    },
+    {
+      "studentId": "201524070136",
+      "studentName": "孙惠子",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 1
+    },
+    {
+      "studentId": "201524070137",
+      "studentName": "唐明德",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 1
+    },
+    {
+      "studentId": "201524070138",
+      "studentName": "王芳",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 1
+    },
+    {
+      "studentId": "201524070139",
+      "studentName": "王建超",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070140",
+      "studentName": "吴亚威",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070141",
+      "studentName": "吴钟煌",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070142",
+      "studentName": "吴钟帅",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070143",
+      "studentName": "徐士杰",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070144",
+      "studentName": "杨敏玲",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070145",
+      "studentName": "杨沛霖",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070146",
+      "studentName": "于国杰",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070147",
+      "studentName": "张亮",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070148",
+      "studentName": "张子武",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070149",
+      "studentName": "赵露露",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070150",
+      "studentName": "赵学超",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070151",
+      "studentName": "郑铭",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070152",
+      "studentName": "郑声声",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524070153",
+      "studentName": "周铃",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201505060409",
+      "studentName": "邓泽",
+      "sex": "男",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    },
+    {
+      "studentId": "201524010103",
+      "studentName": "曹安妤",
+      "sex": "女",
+      "late": 0,
+      "leave": 0,
+      "truancy": 0
+    }
+  ]
+}

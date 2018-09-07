@@ -1,0 +1,38 @@
+[
+  {
+    "name": "studentId",
+    "type": "double",
+    "default": null
+  },
+  {
+    "name": "name",
+    "type": "varchar(255)",
+    "default": null
+  },
+  {
+    "name": "late",
+    "type": "tinyint(10)",
+    "default": null
+  },
+  {
+    "name": "sex",
+    "type": "tinyint(10)",
+    "default": null
+  },
+  {
+    "name": "leave",
+    "type": "tinyint(10)",
+    "default": null
+  },
+  {
+    "name": "Truancy",
+    "type": "tinyint(10)",
+    "default": null
+  },
+  {
+    "name": "text",
+    "type": "text",
+    "default": null
+  }
+]
+

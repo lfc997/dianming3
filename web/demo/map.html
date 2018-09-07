@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>统计分析</title>
+    <link rel="stylesheet" href="../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../frame/static/css/style.css">
+    <link rel="icon" href="../frame/static/image/code.png">
+</head>
+<body class="body">
+
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+<div id="main-line" style="height:400px;"></div>
+<div id="main-line2" style="height:400px;"></div>
+<div id="main-line3" style="height:400px;"></div>
+<div id="main-bing" style="width: 100%;height:400px;"></div>
+
+<script type="text/javascript" src="../frame/layui/layui.js"></script>
+<script type="text/javascript" src="../frame/echarts/echarts.min.js"></script>
+<script type="text/javascript">
+    //获取
+    console.dir(window.parent.sudents)
+    // 基于准备好的dom，初始化echarts实例
+    var students = window.parent.sudents;
+    var dataX = new Array();
+    var dataXLate = new Array();
+    var dateXLeave = new Array();//早退
+    var dateXTruancy = new Array();
+    students.forEach(function (item, index) {
+        dataX[index] = item.studentName;
+        dataXLate[index] = item.late;
+        dateXLeave[index] = item.leave;
+        dateXTruancy[index] = item.truancy;
+    })
+
+    var myChart_late = echarts.init(document.getElementById('main-line'));
+    var myChart_leave = echarts.init(document.getElementById('main-line2'));
+    var myChart_truancy = echarts.init(document.getElementById('main-line3'));
+    //迟到的数据
+    var date_late = {
+        title: {
+            text: '迟到'
+        },
+        tooltip: {},
+        legend: {
+            data: ['统计分析']
+        },
+        xAxis: {
+            data: dataX
+        },
+        yAxis: {
+            data: ["1", "2", "3", "4"]
+        }
+        ,
+        series: [{
+            name: '迟到',
+            type: 'bar',
+            data: dataXLate
+        }]
+    }
+    // 使用刚指定的配置项和数据显示图表。
+    myChart_late.setOption(date_late);
+    //早退的数据
+    var dte_leave = {
+        title: {
+            text: '早退'
+        },
+        tooltip: {},
+        legend: {
+            data: ['统计分析']
+        },
+        xAxis: {
+            data: dataX
+        },
+        yAxis: {
+            data: ["1", "2", "3", "4", "5", "6", "7", "8"]
+        }
+        ,
+        series: [{
+            name: '早退',
+            type: 'bar',
+            data: dateXLeave
+        }]
+    }
+    myChart_leave.setOption(dte_leave);
+    //旷课的数据
+    var date_truancy = {
+        title: {
+            text: '旷课'
+        },
+        tooltip: {},
+        legend: {
+            data: ['统计分析']
+        },
+        xAxis: {
+            data: dataX
+        },
+        yAxis: {
+            data: ["1", "2", "3", "4"]
+        }
+        ,
+        series: [{
+            name: '旷课',
+            type: 'bar',
+            data: dateXTruancy
+        }]
+    }
+    myChart_truancy.setOption(date_truancy);
+
+    function getArray(dateArray) {
+        dateArray.sort();//升序
+        var len = dateArray.pop() + 1;
+        var lenArray = new Array();
+        for (var i = 1; i < len; i++) {
+            lenArray.push("" + i);
+        }
+        console.log(lenArray);
+        return lenArray;
+    }
+
+    // 基于准备好的dom，初始化echarts实例
+    var chart = echarts.init(document.getElementById('main-bing'));
+
+    // 配置
+    chart.setOption({
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                data: [
+                    {value: 30, name: '正常上课'},
+                    {value: 3, name: '旷课'},
+                    {value: 5, name: '早退'},
+                    {value: 20, name: '迟到'},
+                ]
+            }
+        ]
+    });
+
+    layui.use(['element'], function () {
+        var element = layui.element
+            , $ = layui.jquery;
+
+        // you code ...
+
+
+    });
+</script>
+</body>
+</html>

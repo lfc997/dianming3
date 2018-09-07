@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../css/myClasses_CSS.css">
+    </link>
+
+</head>
+<body class="body">
+<div>我的班级</div>
+<div class="content" id="myContent">
+    <div class="ClassLine">
+        <div class="myClass" id="myClass" style="display: none;">
+            <div class="className">
+                <div>2015级软件工程班</div>
+            </div>
+            <div class="classNumber">
+                <div id="number"><span>人数：</span><span id="numberText" style="color: cornflowerblue">54</span></div>
+            </div>
+        </div>
+        <div class="myClassAdd myClass" id="myClassAdd" style="display: none"><img src="../image/add.png"></div>
+    </div>
+</div>
+<script src="../js/untils.js"></script>
+<script src="../js/URl.js"></script>
+<script>
+    //请求数据
+    var xmlHttp = createXMlHttp();
+    xmlHttp.open("GET", url_home, true);
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.status == 200 && xmlHttp.readyState == 4) {
+            var date = JSON.parse(xmlHttp.responseText);
+            console.dir(date);
+            if (date.code == 4001) {
+                console.log("请求数据成功");
+                console.log(date.use.classes);
+                setContent(date.use.classes);
+            } else {
+                alert("没有登陆")
+            }
+        }
+    }
+    xmlHttp.send();
+
+    function setContent(classes) {
+
+
+        var myclass;
+        // 每行只能最多三个班级
+        var classLine;
+        var myContent = document.getElementById("myContent");
+        for (var i = 0; i < classes.length; i++) {
+            var myClassDate = classes[i];
+            if (i % 3 == 0) {
+                classLine = document.createElement("div");
+                classLine.className = "ClassLine";
+                classLine.style.display = "flex";
+                myContent.appendChild(classLine);
+            }
+            myclass = document.getElementById("myClass").cloneNode(true);
+            myclass.querySelector(".className div").innerHTML = myClassDate.className;
+            myclass.querySelector("#numberText").innerHTML = myClassDate.classNumber;
+            myclass.classId = myClassDate.classId;
+            myclass.onclick = function () {
+                myStudent(myclass.classId);
+            }
+            myclass.style.display = "block";
+            classLine.appendChild(myclass)
+        }
+        if (classLine.querySelectorAll("div").length == 18) {
+            classLine = document.createElement("div");
+            classLine.className = "ClassLine";
+            myContent.appendChild(classLine)
+            console.log("重新创建")
+        }
+        var addCard = document.getElementById("myClassAdd").cloneNode(true);
+        addCard.style.display = "flex";
+        classLine.appendChild(addCard);
+        var myContent = document.getElementById("myContent");
+        var contentWidth = myContent.offsetWidth;
+        var myClasses = document.getElementsByClassName("myClass");
+        for (var i = 0; i < myClasses.length; i++) {
+            var myClass = myClasses[i];
+            myClass.style.width = contentWidth / 3 + "px"
+            myClass.style.height = (contentWidth / 3) * 0.5 + "px"
+        }
+    }
+
+    function myStudent(classId) {
+        console.log("班级的id" + classId)
+        window.parent.classId = classId;
+        window.location.assign("dianming.html");
+    }
+
+</script>
+</body>
+</html>

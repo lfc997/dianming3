@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="jquery-3.3.1.js"></script>-->
+    <!--ypl ON 2018/9/4-->
+    <style>
+        .layui-btn-small {
+            height: 30px;
+            line-height: 30px;
+            padding: 0 10px;
+            font-size: 12px
+        }
+
+        .layui-btn-primary {
+            border: 1px solid #C9C9C9;
+            background-color: #fff;
+            color: #555
+        }
+
+        .layui-btn {
+            display: inline-block;
+            height: 38px;
+            line-height: 38px;
+            padding: 0 18px;
+            background-color: #009688;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            opacity: .9;
+            filter: alpha(opacity=90)
+        }
+
+        i {
+            font-style: italic;
+        }
+
+        .layui-icon {
+            font-family: layui-icon !important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        .file_form {
+            width: 260px;
+
+        }
+
+        .file_form div {
+            width: 100%;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .div_back {
+            width: 260px;
+        }
+
+        .div_frame {
+            width: 100%;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="div_frame">
+    <div class="div_back">
+
+        <form class="file_form" action="http://localhost:8080/dianming2/upload" enctype="multipart/form-data"
+              method="post">
+            <div>班级花名册上传</div>
+            <div><input type="text" placeholder="班级名字" id="nameInput" name="className"></div>
+            <div>
+                <input type="file" name="userName" style="margin-left: 70px">
+            </div>
+            <div>
+                <button class="layui-btn layui-btn-primary layui-btn-small" id="upLoad" type="submit">
+                    <i class="layui-icon">上传</i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="../js/untils.js"></script>
+<script>
+    var upLoad = document.getElementById("upLoad");
+    var nameInput = document.getElementById("nameInput");
+    nameInput.onblur = function (ev) {
+        if (this.value == null) {
+            upLoad.disabled = true;
+            console.log("不能为空")
+            window.alert("班级名字不能为空")
+        } else {
+            upLoad.disabled = false;
+        }
+    }
+</script>
+
+</body>
+</html>
